@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Survey System</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: url(https://img.freepik.com/free-photo/high-angle-uncompleted-voting-questionnaire-close-up_23-2148265550.jpg?w=1380&t=st=1704594973~exp=1704595573~hmac=cb3b30e69d902e1569b207e76e775fcd05a1b9a7451129fe5207e824d8d9726b) no-repeat center center fixed;
+            background-size: cover;
+            background-position: center center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #343a40;
+        }
+
+        .navbar-brand,
+        .navbar-nav .nav-link {
+            color: #fff;
+        }
+
+        .jumbotron {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 50px;
+            margin-top: 100px;
+            border-radius: 15px;
+        }
+
+            .jumbotron h1 {
+                font-size: 3.5em;
+                font-weight: bold;
+                color: #343a40;
+            }
+
+            .jumbotron p {
+                font-size: 1.5em;
+                color: #343a40;
+            }
+
+        .survey-container {
+            margin-top: 30px;
+        }
+
+        .survey-card {
+            background-color: #fff;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            height: 100%;
+        }
+
+            .survey-card h2 {
+                font-size: 1.5em;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+
+            .survey-card p {
+                font-size: 1.2em;
+                margin-bottom: 20px;
+            }
+
+        .btn-primary {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+            .btn-primary:hover {
+                background-color: #218838;
+                border-color: #1e7e34;
+            }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="/Home/Index">Anket Sistemi</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/Index">Anasayfa</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/Surveys">Anketler</a>
+                </li>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <!-- Kullanıcı giriş yapmışsa -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home/Logout">Çıkış Yap</a>
+                    </li>
+                }
+                else
+                {
+                    <!-- Kullanıcı giriş yapmamışsa -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home/Login">Giriş</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home/Register">Kayıt Ol</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </nav>
+
+
+    <!-- Content -->
+    <div class="container">
+        @RenderBody()
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+@await RenderSectionAsync("Scripts", false)

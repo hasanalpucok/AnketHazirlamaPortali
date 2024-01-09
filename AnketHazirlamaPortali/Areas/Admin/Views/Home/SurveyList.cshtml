@@ -1,0 +1,40 @@
+@model List<Anket>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Başlık</th>
+            <th>Sorular</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href="Products.Detail.html">@item.Baslik</a>
+                    <div class="text-small text-muted text-truncate position">#@item.Baslik</div>
+                </td>
+                <td>
+                    <ul>
+                        @foreach (var soru in item.Sorular)
+                        {
+                            <li>@soru.Metin</li>
+                        }
+                    </ul>
+                </td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="İşlemler">
+                        <form asp-area="Admin" asp-controller="Home" asp-action="EditSurvey" asp-route-id="@item.Id" method="get">
+                            <button type="submit" class="btn btn-success">Düzenle</button>
+                        </form>
+
+                        <form asp-area="Admin" asp-controller="Home" asp-action="DeleteSurvey" asp-route-id="@item.Id" method="post">
+                            <button type="submit" class="btn btn-danger">Sil</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

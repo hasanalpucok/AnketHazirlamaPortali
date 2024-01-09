@@ -1,0 +1,76 @@
+@model AnketViewModel
+
+<form id="anketForm">
+    <div class="form-group">
+        <label for="Baslik">Anket Başlığı</label>
+        <input type="text" class="form-control" id="Baslik" name="Baslik" required>
+    </div>
+    <div class="form-group" id="sorularContainer">
+        <label for="Sorular">Sorular</label>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" name="Sorular" required>
+            <button type="button" class="btn btn-success" onclick="addSoru()">Soru Ekle</button>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Anketi Ekle</button>
+</form>
+@section scripts
+{
+    <script>
+        var soruIndex = 1;
+
+        function addSoru() {
+            var inputGroup = document.createElement('div');
+            inputGroup.classList.add('input-group', 'mb-3');
+
+            var input = document.createElement('input');
+            input.type = 'text';
+            input.classList.add('form-control');
+            input.name = 'Sorular';
+            input.required = true;
+
+            var button = document.createElement('button');
+            button.type = 'button';
+            button.classList.add('btn', 'btn-danger');
+            button.innerText = 'Soru Sil';
+            button.onclick = function () {
+                inputGroup.remove();
+            };
+
+            inputGroup.appendChild(input);
+            inputGroup.appendChild(button);
+
+            document.getElementById('sorularContainer').appendChild(inputGroup);
+
+            soruIndex++;
+        }
+        document.getElementById('anketForm').onsubmit = async function (e) {
+            e.preventDefault();
+
+            var formData = new FormData(this);
+
+            try {
+                const response = await fetch('@Url.Action("AddSurvey")', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const data = await response.json();
+
+                console.log(data);
+
+                if (data.redirectUrl) {
+                    window.location.href = data.redirectUrl;
+                } else {
+                    console.log(data);
+                }
+            } catch (error) {
+                console.error('There was a problem with the fetch operation:', error);
+            }
+        };
+    </script>
+}

@@ -1,0 +1,22 @@
+@model List<Anket>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Anketler";
+}
+<!-- Survey Container -->
+<div class="survey-container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-6 mt-4">
+                <div class="card survey-card">
+                    <div class="card-body">
+                        <h2 class="card-title">@item.Baslik</h2>
+                        <p class="card-text">@item.Baslik Anketine başlamak için alttaki butona basabilirsin.</p>
+                        <a asp-area="" asp-controller="Home" asp-action="SurveyDetails" asp-route-surveyId="@item.Id" class="btn btn-primary">Ankete Başla</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,22 @@
+@model List<Cevap>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Anket</th>
+            <th>Soru</th>
+            <th>Kullanıcı</th>
+            <th>Cevap Metni</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>@item.Anket.Baslik</th>
+                <td>@item.Soru.Metin</td>
+                <td>@item.User.UserName</td>
+                <td>@item.CevapMetni</td>
+            </tr>
+        }
+    </tbody>
+</table>

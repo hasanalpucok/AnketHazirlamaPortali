@@ -1,0 +1,21 @@
+@model AnketEditViewModel
+
+<form asp-action="EditSurvey">
+    <input type="hidden" asp-for="AnketId" />
+    <div class="form-group">
+        <label asp-for="AnketBaslik"></label>
+        <input asp-for="AnketBaslik" class="form-control" required />
+    </div>
+
+    <h4>Sorular</h4>
+    @for (int i = 0; i < Model.Sorular.Count; i++)
+    {
+        <div class="form-group">
+            <input type="hidden" asp-for="@Model.Sorular[i].Id" />
+            <label asp-for="@Model.Sorular[i].Metin"></label>
+            <input asp-for="@Model.Sorular[i].Metin" class="form-control" required />
+        </div>
+    }
+
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+</form>
